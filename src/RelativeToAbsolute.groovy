@@ -6,18 +6,18 @@ import org.jsoup.select.Elements
 class OptionsInfo {
     String inputFileLocation
     String outputFileLocation
-    String urlPrefix = "https://something.com/"
+    String baseUrl = "https://something.com/"
 }
 
 OptionsInfo readArgs(args) {
     OptionsInfo optionsInfo = new OptionsInfo()
-    CliBuilder cli = new CliBuilder(usage:'groovy RelativeToAbsolute.groovy -i "inputFile" -o "outputFile" [-p "URLPrefix"]',
+    CliBuilder cli = new CliBuilder(usage:'groovy RelativeToAbsolute.groovy -i "inputFile" -o "outputFile" [-b "baseUrl"]',
             header:'Options:')
     cli.with {
         h longOpt: 'help', 'Show usage information'
         i longOpt: 'input', 'Specify input file location', args: 1, argName: 'inputFile', required:true
         o longOpt: 'output', 'Specify output file location', args: 1, argName: 'outputFile', required:true
-        p longOpt: 'prefix', 'Specify prefix for absolute URL', args: 1, argName: 'inputFile', required:false
+        b longOpt: 'base', 'Specify base URL for absolute URL', args: 1, argName: 'inputFile', required:false
     }
 
     def options = cli.parse(args)
@@ -32,8 +32,8 @@ OptionsInfo readArgs(args) {
 
     optionsInfo.setInputFileLocation(options.i)
     optionsInfo.setOutputFileLocation(options.o)
-    if (options.p) {
-        optionsInfo.setUrlPrefix(options.p)
+    if (options.b) {
+        optionsInfo.setBaseUrl(options.b)
     }
     return optionsInfo
 }
@@ -58,7 +58,7 @@ if (outputFile.exists()) {
         return null
     }
 }
-Document doc = Jsoup.parse(inputFile, "UTF-8", optionsInfo.urlPrefix);
+Document doc = Jsoup.parse(inputFile, "UTF-8", optionsInfo.baseUrl);
 
 Elements hrefElements = doc.select("[href]")
 hrefElements.each(){
