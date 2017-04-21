@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js">var $wp = jQuery.noConflict()</script>
+    <script type="text/javascript">var $wp = jQuery.noConflict()</script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/localFunctions.js"></script>
+</head>
+
+<body><div id="wooppy_all">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/popcss.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <a href="#" class="lower-right-button open-btn" id="wooppy-add-class" style="color:orange; background-color:white; z-index:990"><i aria-hidden="true"></i>Wooppy!</a>
+
+    <aside id="sidebar_secondary" class="tabbed_sidebar ng-scope chat_sidebar">
+        <div class="popup-head">
+            <div class="popup-head-left pull-left" style="color:white">
+                <!--img alt="Wooppy" title="Wooppy" src="Wooppy-Logo.png"
+                    class="wooppy-logo"-->
+                <h1>Tookar Recommender</h1>
+                <!--
+                <div style="display:inline; padding:3px; background: white; border-radius: 4px ; text-align: center; vertical-align: middle; color: purple">
+                    Wooppy
+                </div>
+                -->
+
+            </div>
+            <div class="popup-head-right pull-right">
+                <!--button id="add-client-side"><i class="glyphicon glyphicon-user"></i></button-->
+                <button data-widget="remove" id="wooppy-remove-class" class="chat-header-button pull-right" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+            </div>
+        </div>
+        <div id="wooppy-chat" class="chat_box_wrapper chat_box_small chat_box_active" style="opacity: 1; display: block; transform: translateX(0px); background-color: white">
+            <div class="chat_box touchscroll chat_box_colors_a" id="wooppy_body">
+            </div>
+        </div>
+		<div style="background-color:white">
+			<div class="chat_submit_box">
+				<div class="uk-input-group" style="width:inherit">
+					<div class="gurdeep-chat-box" style="width:inherit">
+						<span style="vertical-align: sub;" class="uk-input-group-addon" id="wooppy-show-conversation-log">
+								<!--a href="#"><i class="fa fa-smile-o"></i></a-->
+							</span>
+              <a href = "#" id="wooppy-reset-cookie-link"><img src="icons/Tookar-Home.png" width="25px"></a>
+						<input type="text" placeholder="Type a message" id="wooppy-submit-message" name="wooppy-submit-message" class="md-input" style="width:270px">
+						<span style="vertical-align: sub; text-align: right;" class="uk-input-group-addon">
+								<a href = "#" id="wooppy-submit-query"><img src="icons/Tookar-Send.png" width="25px"></a>&nbsp;
+                <a href = "#" id="wooppy-show-result"><img src="icons/result_eye.png" width="25px"></a>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+    </aside>
+</div></body>
+
+<div id="wooppy_templates">
+  <template id="wooppy-chat-server-side">
+      <div class="chat_message_wrapper" id="message-wrapper">
+          <div class="chat_user_avatar">
+              <!--a href="http://www.tookar.my" target="_blank"-->
+                  <img alt="Tookar" title="Tookar" src="images/logo-t.png"
+                      class="md-user-image">
+              <!--/a-->
+          </div>
+          <ul class="chat_message">
+              <li  style="word-break: normal">
+                  <p id="wooppy-chat-server-message">Put server side message here</p><p><span class="chat_message_time"></span></p>
+              </li>
+          </ul>
+      </div>
+  </template>
+
+  <template id="wooppy-chat-client-side">
+      <div class="chat_message_wrapper chat_message_right">
+          <div class="chat_user_avatar">
+              <image alt="user-image" title="user" src="icons/Tookar-User.png" class="md-user-image">
+          </div>
+          <ul class="chat_message">
+              <li style="word-break: normal">
+                  <p id="wooppy-chat-client-message">
+                      Put client side message here
+                      </p><p><span class="chat_message_time">
+                      </span>
+                  </p>
+              </li>
+          </ul>
+      </div>
+  </template>
+
+   <!-- Testing out formatted results -->
+   <template id="wooppy-chat-return-result">
+      <div class="chat_message_wrapper" id="message-wrapper">
+          <div class="chat_user_avatar">
+              <!--a href="http://www.tookar.my" target="_blank"-->
+                  <img alt="Tookar" title="Tookar" src="logo-t.png"
+                      class="md-user-image">
+              <!--/a-->
+          </div>
+          <ul class="chat_message">
+              <li  style="word-break: normal">
+                  <!-- Here is where we can put in the formatted results -->
+                  <div class="result-list">
+                      <a href="https://www.tookar.my/" target="_blank" id="wooppy-image-url">
+                          <img alt="Alt Display" title="Title" src="wooppy_favicon.png" class="result-image">
+                          <p id="wooppy-chat-server-message" style="text-align:center"><b id="wooppy-model">Some car</b> <p style="text-align:center">from <b id="wooppy-price">Some Price</b></p></p>
+                      </a>
+                  </div>
+                  <p><span class="chat_message_time"></span></p>
+              </li>
+          </ul>
+      </div>
+   </template>
+ </div>
+<!-- Testing out formatted results -->
+
+</html>
